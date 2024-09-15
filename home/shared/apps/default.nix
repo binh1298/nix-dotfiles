@@ -2,10 +2,11 @@ _: {
   imports = [
     # ./discord
     # ./matrix
-    # ./edge
+    ./edge
     ./telegram
     ./imagemagick
     ./gimp
+    ./others
     # ./spicetify
   ];
 }

@@ -152,6 +152,7 @@ in {
       gp = "git pull";
       gs = "git status";
       chrome = "setsid google-chrome-stable  --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime";
+      edge = "setsid microsoft-edge --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime";
       obsidian = "setsid obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime";
     };
 
