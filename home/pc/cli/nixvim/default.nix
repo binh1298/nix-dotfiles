@@ -22,6 +22,7 @@
   programs.nixvim = {
     enable = true;
     plugins = {
+      avante.enable = true;
       image.enable = true;
       markdown-preview.enable = true;
       copilot-lua = {
