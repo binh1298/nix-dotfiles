@@ -23,6 +23,7 @@
     enable = true;
     plugins = {
       avante.enable = true;
+      web-devicons.enable = true;
       image.enable = true;
       markdown-preview.enable = true;
       copilot-lua = {

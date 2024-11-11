@@ -4,7 +4,7 @@ _: {
       lsp = {
         enable = true;
         servers = {
-          tsserver = {
+          ts_ls = {
             enable = true;
             extraOptions = {
               preferences = {
@@ -38,7 +38,7 @@ _: {
               };
             };
           };
-          lua-ls.enable = true;
+          lua_ls.enable = true;
           biome.enable = true;
           tailwindcss.enable = true;
           eslint.enable = true;

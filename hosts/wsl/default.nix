@@ -26,7 +26,7 @@
     description = username;
     initialPassword = "123123";
     extraGroups = ["networkmanager" "wheel" "input" "docker" "libvirtd"];
-    
+
     # home = "/home/${username}";
   };
   home-manager.users.${username} = {
@@ -77,7 +77,7 @@
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
 
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''experimental-features = nix-command flakes'';
 
     gc = {

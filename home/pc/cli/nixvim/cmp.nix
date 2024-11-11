@@ -3,7 +3,7 @@ _: {
     plugins = {
       luasnip = {
         enable = true;
-        extraConfig = {
+        settings = {
           enable_autosnippets = true;
         };
       };
