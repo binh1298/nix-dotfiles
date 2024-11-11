@@ -1,5 +1,5 @@
 _: {
   imports = [
-    ./vscode
+    #./vscode
   ];
 }

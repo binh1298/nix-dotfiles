@@ -4,21 +4,21 @@
   programs.nixvim = {
     plugins.conform-nvim = {
       enable = true;
-      # formatOnSave = {
-      #   timeoutMs = 2500;
-      #   lspFallback = true;
-      # };
+      formatOnSave = {
+        timeoutMs = 2500;
+        lspFallback = true;
+      };
       formattersByFt = {
         lua = ["stylua"];
         # Conform will run multiple formatters sequentially
         python = ["isort" "black"];
         # Use a sub-list to run only the first available formatter
         javascript = [["biome-check" "prettier"]];
-        typescript = [["biome-check" "prettier"]];
+        typescript = [["biome-check" "prettierd"]];
         tsx = ["biome-check" "prettier" "rustywind"];
         jsx = ["biome-check" "prettier" "rustywind"];
-        typescriptreact = ["biome-check" "prettier" "rustywind"];
-        javascriptreact = ["biome-check" "prettier" "rustywind"];
+        typescriptreact = ["biome-check" "prettierd" "rustywind"];
+        javascriptreact = ["biome-check" "prettierd" "rustywind"];
         nix = [["alejandra"]];
         go = ["gofmt" "gofumt" "goimports_reviser" "golines"];
         rust = [["rustfmt"]];

@@ -4,6 +4,7 @@
     homeDirectory = "/home/${username}";
     sessionVariables.EDITOR = "nvim";
     sessionVariables.SHELL = "/etc/profiles/per-user/${username}/bin/zsh";
+    stateVersion = "22.11";
   };
 
   programs.home-manager.enable = true;
@@ -15,7 +16,6 @@
     ./shared/system
     ./shared/tools/git-token
     ./pc/cli
-    ./pc/themes
   ];
 
   nixpkgs = {

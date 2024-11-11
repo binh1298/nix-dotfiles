@@ -8,9 +8,9 @@
     ./cmp.nix
     ./conform.nix
     ./lsp.nix
-    # ./nvim-tree.nix
+    ./nvim-tree.nix
     # ./neo-tree.nix
-    ./chadtree.nix
+    # ./chadtree.nix
     ./rust.nix
     ./telescope.nix
     ./treesitter.nix

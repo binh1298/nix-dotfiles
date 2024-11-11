@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  inputs,
   ...
 }: {
   system.stateVersion = "22.05";
@@ -16,7 +17,6 @@
   environment.shells = [pkgs.zsh];
   environment.enableAllTerminfo = true;
   environment = {
-    shells = with pkgs; [bash zsh];
     systemPackages = [pkgs.coreutils];
   };
 
@@ -26,10 +26,13 @@
     description = username;
     initialPassword = "123123";
     extraGroups = ["networkmanager" "wheel" "input" "docker" "libvirtd"];
+    
+    # home = "/home/${username}";
+  };
+  home-manager.users.${username} = {
     imports = [
       ../../home/wsl.nix
     ];
-    # home = "/home/${username}";
   };
 
   wsl = {
