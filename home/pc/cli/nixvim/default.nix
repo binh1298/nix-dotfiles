@@ -22,7 +22,13 @@
   programs.nixvim = {
     enable = true;
     plugins = {
-      avante.enable = true;
+      avante = {
+        enable = true;
+        settings = {
+          provider = "copilot";
+          model = "claude-3-5-sonnet-20241022";
+        };
+      };
       web-devicons.enable = true;
       image.enable = true;
       markdown-preview.enable = true;
