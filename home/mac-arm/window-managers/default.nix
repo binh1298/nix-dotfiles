@@ -1,4 +1,14 @@
 {pkgs, ...}: {
+  home.file."Library/Fonts/sketchybar-app-font.ttf" = {
+    force = true;
+    source = ../Fonts/sketchybar-app-font.ttf;
+  };
+  home.file = {
+    ".config/sketchybar" = {
+      force = true;
+      source = ../sketchybar; # Path to the source directory in your Nix configuration.
+    };
+  };
   home.file.".config/yabai/yabairc" = {
     force = true;
     text = ''
@@ -7,7 +17,7 @@
       # New window spawns to the right if vertical split, or bottom if horizontal split
       yabai -m config window_placement second_child
       # padding set to 12px
-      yabai -m config top_padding 12
+      yabai -m config top_padding 52
       yabai -m config bottom_padding 12
       yabai -m config left_padding 12
       yabai -m config right_padding 12
@@ -25,6 +35,8 @@
       yabai -m rule --add app="^System Settings$" manage=off
       yabai -m rule --add app="^Calculator$" manage=off
       yabai -m rule --add app="^Karabiner-Elements$" manage=off
+
+      borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0 &
     '';
   };
   home.file.".config/skhd/skhdrc" = {

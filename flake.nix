@@ -33,6 +33,8 @@
 
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
   outputs = inputs:
@@ -64,6 +66,14 @@
             ./hosts/mac-arm
             home-manager.darwinModules.home-manager
             (homeManagerDefaults specialArgs)
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                user = macUserName;
+              };
+            }
           ];
         };
       };

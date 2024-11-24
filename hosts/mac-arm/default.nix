@@ -6,8 +6,8 @@
   programs.zsh.enable = true;
   environment = {
     shells = with pkgs; [bash zsh];
-    loginShell = pkgs.zsh;
-    systemPackages = [pkgs.coreutils];
+    # loginShell = pkgs.zsh;
+    systemPackages = [pkgs.coreutils pkgs.readline];
     systemPath = ["opt/homebrew/bin"];
     pathsToLink = ["/Applications"];
   };
@@ -18,8 +18,8 @@
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
 
-  fonts.fontDir.enable = true;
-  fonts.fonts = [(pkgs.nerdfonts.override {fonts = ["Meslo"];})];
+  # fonts.fontDir.enable = true;
+  # fonts.fonts = [(pkgs.nerdfonts.override {fonts = ["Meslo"];})];
   services.nix-daemon.enable = true;
 
   system.defaults = {
@@ -44,8 +44,9 @@
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = {};
-    casks = ["raycast" "amethyst"];
-    taps = ["fujiapple852/trippy"];
-    brews = ["trippy"];
+    casks = ["raycast" "amethyst" "font-hack-nerd-font" "font-sf-pro" "font-sf-mono" "sf-symbols" "steam" "kitty"];
+    taps = ["fujiapple852/trippy" "FelixKratz/formulae"];
+    brews = ["trippy" "sketchybar" "borders" "jq" "gh" "switchaudio-osx" "nowplaying-cli"];
+    onActivation.cleanup = "zap";
   };
 }
