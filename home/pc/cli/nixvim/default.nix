@@ -22,26 +22,26 @@
   programs.nixvim = {
     enable = true;
     plugins = {
-      avante = {
-        enable = true;
-        settings = {
-          provider = "copilot";
-          model = "claude-3-5-sonnet-20241022";
-        };
-      };
+      # avante = {
+      #   enable = true;
+      #   settings = {
+      #     provider = "copilot";
+      #     model = "claude-3-5-sonnet-20241022";
+      #   };
+      # };
       web-devicons.enable = true;
       image.enable = true;
       markdown-preview.enable = true;
-      copilot-lua = {
-        enable = true;
-        suggestion = {
-          enabled = true;
-          autoTrigger = true;
-          keymap = {
-            accept = "<C-A>";
-          };
-        };
-      };
+      # copilot-lua = {
+      #   enable = false;
+      #   suggestion = {
+      #     enabled = true;
+      #     autoTrigger = true;
+      #     keymap = {
+      #       accept = "<C-A>";
+      #     };
+      #   };
+      # };
       indent-blankline.enable = true;
       nvim-colorizer = {
         enable = true;
@@ -71,11 +71,28 @@
       vim-dadbod-ui
       vim-dadbod-completion
       vim-dadbod
+      supermaven-nvim
     ];
 
     extraConfigLua =
       #Lua
       ''
+        -- Supermaven
+        require("supermaven-nvim").setup({
+           keymaps = {
+             accept_suggestion = "<C-A>",
+           },
+        })
+
+        local supermaven = require("supermaven-nvim.api")
+        vim.api.nvim_create_user_command("SupermavenUseFree",
+          function(args)
+            supermaven.use_free_version()
+          end, {
+          desc = "enable supermaven",
+          }
+        )
+
         -- CONFORM
         require("conform").setup({
           format_on_save = function(bufnr)

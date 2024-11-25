@@ -6,8 +6,8 @@
       enable = true;
       settings = {
         format_on_save = {
-          timeout_ms = 2500;
-          lsp_fallback = true;
+          timeout_ms = 1000;
+          lsp_fallback = false;
         };
         formatters = {
           "biome-check" = {
@@ -19,28 +19,28 @@
           # Conform will run multiple formatters sequentially
           python = ["isort" "black"];
           # Use a sub-list to run only the first available formatter
-          javascript = [["biome-check" "prettier"]];
-          typescript = [["biome-check" "prettierd"]];
-          tsx = ["biome-check" "prettier" "rustywind"];
-          jsx = ["biome-check" "prettier" "rustywind"];
-          typescriptreact = ["biome-check" "prettierd" "rustywind"];
-          javascriptreact = ["biome-check" "prettierd" "rustywind"];
-          nix = [["alejandra"]];
+          javascript = ["biome-check" "prettierd"];
+          typescript = ["biome-check" "prettierd"];
+          tsx = ["biome-check" "prettierd"];
+          jsx = ["biome-check" "prettierd"];
+          typescriptreact = ["biome-check" "prettierd"];
+          javascriptreact = ["biome-check" "prettierd"];
+          nix = ["alejandra"];
           go = ["gofmt" "gofumt" "goimports_reviser" "golines"];
-          rust = [["rustfmt"]];
+          rust = ["rustfmt"];
           # yaml = [["prettier"]];
-          json = [["biome-check" "prettier"]];
+          json = [["biome-check" "prettierd"]];
           sql = [["sqlfmt"]];
-          html = [["biome-check" "prettier"]];
-          css = [["biome-check" "prettier"]];
-          markdown = [["prettier"]];
-          graphql = [["biome-check" "prettier"]];
+          html = [["biome-check" "prettierd"]];
+          css = [["biome-check" "prettierd"]];
+          markdown = [["prettierd"]];
+          graphql = [["biome-check" "prettierd"]];
 
           # Use the "*" filetype to run formatters on all filetypes.
           # "*" = ["codespell"];
           # Use the "_" filetype to run formatters on filetypes that don't
           # have other formatters configured.
-          "_" = ["trim_whitespace"];
+          "_" = ["trim_whitespace prettierd"];
         };
       };
     };
