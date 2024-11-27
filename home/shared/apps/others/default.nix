@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # teams
-    openvpn3
+    # openvpn3
   ];
 }
