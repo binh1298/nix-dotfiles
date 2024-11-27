@@ -8,6 +8,7 @@
         format_on_save = {
           timeout_ms = 1000;
           lsp_fallback = false;
+          stop_after_first = true;
         };
         formatters = {
           "biome-check" = {
@@ -28,13 +29,13 @@
           nix = ["alejandra"];
           go = ["gofmt" "gofumt" "goimports_reviser" "golines"];
           rust = ["rustfmt"];
-          # yaml = [["prettier"]];
-          json = [["biome-check" "prettierd"]];
-          sql = [["sqlfmt"]];
-          html = [["biome-check" "prettierd"]];
-          css = [["biome-check" "prettierd"]];
-          markdown = [["prettierd"]];
-          graphql = [["biome-check" "prettierd"]];
+          # yaml = ["prettier"];
+          json = ["biome-check" "prettierd"];
+          sql = ["sqlfmt"];
+          html = ["biome-check" "prettierd"];
+          css = ["biome-check" "prettierd"];
+          markdown = ["prettierd"];
+          graphql = ["biome-check" "prettierd"];
 
           # Use the "*" filetype to run formatters on all filetypes.
           # "*" = ["codespell"];

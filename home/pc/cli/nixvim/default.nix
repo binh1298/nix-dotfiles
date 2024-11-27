@@ -8,9 +8,9 @@
     ./cmp.nix
     ./conform.nix
     ./lsp.nix
-    ./nvim-tree.nix
+    # ./nvim-tree.nix
     # ./neo-tree.nix
-    # ./chadtree.nix
+    ./chadtree.nix
     ./rust.nix
     ./telescope.nix
     ./treesitter.nix
@@ -32,7 +32,6 @@
       web-devicons.enable = true;
       image.enable = true;
       markdown-preview.enable = true;
-      # copilot-lua = {
       #   enable = false;
       #   suggestion = {
       #     enabled = true;
@@ -71,7 +70,7 @@
       vim-dadbod-ui
       vim-dadbod-completion
       vim-dadbod
-      supermaven-nvim
+      # supermaven-nvim
     ];
 
     extraConfigLua =
@@ -221,6 +220,30 @@
         term_colors = true;
       };
     };
+    # colorschemes.tokyonight = {
+    #   enable = true;
+    #   settings = {
+    #     tokyonight = true;
+    #     style = "night";
+    #   };
+    # };
+    # colorschemes.onedark = {
+    #   enable = true;
+    #   settings = {
+    #     onedark = true;
+    #     style = "darker";
+    #     integrations = {
+    #       cmp = true;
+    #       gitsigns = true;
+    #       mini = {
+    #         enabled = true;
+    #       };
+    #       notify = true;
+    #       nvimtree = true;
+    #       treesitter = true;
+    #     };
+    #   };
+    # };
 
     keymaps = [
       {
