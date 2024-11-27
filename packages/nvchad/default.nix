@@ -8,28 +8,29 @@
 in
   stdenvNoCC.mkDerivation rec {
     name = "nvchad";
-    version = "2.0";
+    version = "2.5";
 
     src = fetchFromGitHub {
-      owner = "NvChad";
-      repo = "NvChad";
-      rev = "refs/heads/v${version}";
-      sha256 = "3gH3VIXKeWDlFowfsxffRcjOa7Yjoy+COfX0sVNDc24=";
+      owner = "binh1298";
+      repo = "starter";
+      rev = "main";
+      sha256 = "vEmfceJL9NAtPHhpd3vFCfW8Hrxg/Dj3RoHjW+bhZyc=";
     };
 
     preferLocalBuild = true;
 
     # remember to rm -rf .config/nvim .local/share/nvim .cache/nvim when reinstalling on mac
+    # rm -rf ~/.config/nvim
+    # rm -rf ~/.local/share/nvim
+    # rm -rf ~/.cache/nvim
     installPhase = ''
       mkdir -p $out
       cp -r ./ $out
-      mkdir -p "$out/lua/custom"
-      cp -r ${custom}/* "$out/lua/custom/"
     '';
 
     meta = with lib; {
       description = "NvChad";
-      homepage = "https://github.com/NvChad/NvChad";
+      homepage = "https://github.com/NvChad/starter";
       platforms = platforms.all;
       license = licenses.gpl3;
     };
