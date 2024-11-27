@@ -3,12 +3,18 @@
     enable = true;
     clock24 = true;
     baseIndex = 1;
-    terminal = "xterm-256color";
+    terminal = "screen-256color";
     escapeTime = 500;
     keyMode = "vi";
     prefix = "C-b";
     mouse = true;
+
     extraConfig = ''
+      set-option -g default-terminal "screen-256color"
+
+      set-option -g default-shell /bin/zsh
+      set -g default-command /bin/zsh
+
       set -g @resurrect-processes '"~nvim->nvim"'
 
       # Shift Alt vim keys to switch windows
