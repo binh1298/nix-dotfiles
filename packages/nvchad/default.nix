@@ -14,7 +14,7 @@ in
       owner = "binh1298";
       repo = "starter";
       rev = "main";
-      sha256 = "umkU1S8Tgz+mexxxpB1JyosTWRCnWOd0cRlXz+3yFeA=";
+      sha256 = "HCSmSUSJ4wlIf7ZwZyBvP1zJa+sjd0q+GzNsQUKwmVg=";
     };
 
     preferLocalBuild = true;

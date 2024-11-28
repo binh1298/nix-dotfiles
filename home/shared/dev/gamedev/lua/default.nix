@@ -1,7 +1,7 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # Lua packages
-    lua # Lua programming language
+    lua51Packages.lua # Lua programming language
     stylua # Lua formatter
     selene # Lua linter written in rust
     # luaformatter # Lua formatter (currently using this one)

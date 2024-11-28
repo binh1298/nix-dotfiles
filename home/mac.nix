@@ -10,7 +10,6 @@
     curl
     less
     util-linux
-    neovim
   ];
   home.sessionVariables = {
     PAGER = "less";
