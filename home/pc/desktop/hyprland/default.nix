@@ -32,10 +32,10 @@ in {
       "$mainMod" = "ALT";
       monitor = [
         # "eDP-1,1920x1080,0x0,1"
-        # ",1920x1080,auto,1"
-        "HDMI-A-2,2560x1440@144,0x0,1"
-        # "HDMI-A-1,1920x1080@60,2560x0,1"
-        "Unknown-1,disable"
+        ",1920x1080,auto,1"
+        "DP-4,2560x1440@144,0x0,1"
+        "HDMI-A-2,1920x1080@60,2560x0,1"
+        # "Unknown-1,disable"
       ];
 
       xwayland = {force_zero_scaling = true;};

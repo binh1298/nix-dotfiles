@@ -40,9 +40,9 @@
 
   fonts.fontconfig.enable = true;
 
-   xdg.configFile."nvim/" = {
-     source = pkgs.callPackage ../packages/nvchad {};
-   };
+  xdg.configFile."nvim/" = {
+    source = pkgs.callPackage ../packages/nvchad {};
+  };
 
   home.sessionPath = [
     "$HOME/.local/bin"
