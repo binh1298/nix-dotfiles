@@ -7,9 +7,9 @@
   programs.firefox = {
     enable = true;
     profiles.${username} = {
-      search.default = "Google";
+      search.default = "google";
       search.force = true;
-      extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+      extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
         darkreader
         # decentraleyes
         # clearurls

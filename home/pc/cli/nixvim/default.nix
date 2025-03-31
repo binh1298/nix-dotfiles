@@ -41,10 +41,22 @@
       #     };
       #   };
       # };
-      indent-blankline.enable = true;
-      nvim-colorizer = {
+      copilot-lua = {
         enable = true;
-        userDefaultOptions.tailwind = true;
+        settings = {
+          suggestion = {
+            enabled = true;
+            auto_trigger = true;
+            keymap = {
+              accept = "<C-A>";
+            };
+          };
+        };
+      };
+      indent-blankline.enable = true;
+      colorizer = {
+        enable = true;
+        # user_default_options.tailwind = true;
       };
       comment.enable = true;
       gitsigns = {

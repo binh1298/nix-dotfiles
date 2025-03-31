@@ -7,7 +7,7 @@
   home = {
     username = username;
     homeDirectory = "/home/${username}";
-    stateVersion = "22.11";
+    stateVersion = "25.05";
   };
 
   programs.home-manager.enable = true;
@@ -40,9 +40,9 @@
 
   fonts.fontconfig.enable = true;
 
-  # xdg.configFile."nvim/" = {
-  #   source = pkgs.callPackage ../packages/nvchad {};
-  # };
+   xdg.configFile."nvim/" = {
+     source = pkgs.callPackage ../packages/nvchad {};
+   };
 
   home.sessionPath = [
     "$HOME/.local/bin"

@@ -20,9 +20,9 @@
       url."https://".insteadOf = "git://";
       url."https://${secrets.github_token}:x-oauth-basic@github.com/manabie-com".insteadOf = "https://github.com/manabie-com";
 
-      url."https://${secrets.gitlab_ah_user}:${secrets.gitlab_ah_token}@code.vng.vn".insteadOf = "https://code.vng.vn";
+      # url."https://${secrets.gitlab_ah_user}:${secrets.gitlab_ah_token}@code.vng.vn".insteadOf = "https://code.vng.vn";
 
-      url."https://${secrets.gitlab_vga_user}:${secrets.gitlab_vga_token}@gitlab.gt.vng.vn".insteadOf = "https://gitlab.gt.vng.vn";
+      # url."https://${secrets.gitlab_vga_user}:${secrets.gitlab_vga_token}@gitlab.gt.vng.vn".insteadOf = "https://gitlab.gt.vng.vn";
 
       core.editor = "nvim";
       core.excludesfile = "~/.gitignore";

@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  # home.packages = with pkgs; [ kitty ];
+  home.packages = with pkgs; [ kitty ];
   xdg = {
     configFile = {
       "kitty/kitty.conf".text = import ./kitty.nix;

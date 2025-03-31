@@ -1,8 +1,8 @@
 _: {
   programs.nixvim = {
     plugins = {
-      rustaceanvim = { enable = true; };
-      crates-nvim = { enable = true; };
+      rustaceanvim = {enable = true;};
+      crates = {enable = true;};
     };
   };
 }

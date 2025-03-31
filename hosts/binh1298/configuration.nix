@@ -3,6 +3,7 @@
   pkgs,
   inputs,
   username,
+  lib,
   ...
 }: {
   imports = [
@@ -18,12 +19,13 @@
 
   # Bootloader.
   boot = {
-    kernelModules = ["v4l2loopback"]; # Autostart kernel modules on boot
-    extraModulePackages = [pkgs.linuxPackages.v4l2loopback]; # loopback module to make OBS virtual camera work
+    kernelModules = ["r8125" "r8169" "iwlwifi"]; # Autostart kernel modules on boot
+    # extraModulePackages = [pkgs.linuxPackages.v4l2loopback]; # loopback module to make OBS virtual camera work
     extraModprobeConfig = ''
       options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
     '';
     kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
+    kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = ["ntfs"];
     loader = {
       systemd-boot.enable = false; # (for UEFI systems only)
@@ -38,7 +40,7 @@
         efiSupport = true;
         useOSProber = true;
         # Change this to true when you have multiple OSes installed
-        efiInstallAsRemovable = true;
+        efiInstallAsRemovable = false;
         configurationLimit = 3;
         theme = pkgs.fetchFromGitHub {
           owner = "Lxtharia";
@@ -67,6 +69,7 @@
     # avoid checking if IP is already taken to boot a few seconds faster
     dhcpcd.extraConfig = "noarp";
     hostName = "nixos"; # Define your hostname.
+    interfaces.enp7s0.useDHCP = true;
     # Configure network proxy if necessary
     # proxy.default = "http://user:password@proxy:port/";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -91,7 +94,8 @@
     };
   };
   i18n.inputMethod = {
-    enabled = "fcitx5";
+    enable = true;
+    type = "fcitx5";
     fcitx5.addons = with pkgs; [
       gtk4
       fcitx5-gtk
@@ -144,7 +148,6 @@
       LIBVA_DRIVER_NAME = "nvidia";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       __GL_GSYNC_ALLOWED = "1";
-      __GL_VRR_ALLOWED = "1"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
       XCURSOR_THEME = "macOS-BigSur";
       XCURSOR_SIZE = "32";
       QT_AUTO_SCREEN_SCALE_FACTOR = "1";
@@ -152,6 +155,28 @@
       EDITOR = "nvim";
     };
     sessionVariables = {
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      LIBVA_DRIVER_NAME = "nvidia";
+      __GL_GSYNC_ALLOWED = "1";
+      __GL_VRR_ALLOWED = "0";
+      WLR_DRM_NO_ATOMIC = "1";
+
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      QT_QPA_PLATFORM = "wayland";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
+
+      GDK_SCALE = "2";
+
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
+
+      NVD_BACKEND = "direct";
+
       NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland
       WLR_NO_HARDWARE_CURSORS = "1"; # Fix cursor rendering issue on wlr nvidia.
       DEFAULT_BROWSER = "${pkgs.brave}/bin/firefox"; # Set default browser
@@ -162,6 +187,7 @@
     };
     systemPackages = with pkgs; [
       v4l-utils
+      pciutils
       killall
       git
       wget
@@ -180,20 +206,33 @@
     extraPortals = with pkgs; [xdg-desktop-portal-gtk];
   };
 
-  hardware = {
-    nvidia = {
-      open = false;
-      nvidiaSettings = true;
-      powerManagement.enable = true;
-      modesetting.enable = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
-    opengl = {
-      enable = true;
-      driSupport32Bit = true;
-      extraPackages = with pkgs; [nvidia-vaapi-driver];
+  # For NVIDIA
+  hardware.graphics = {
+    enable = true;
+  };
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+
+    powerManagement.enable = false;
+
+    powerManagement.finegrained = false;
+
+    open = true;
+
+    nvidiaSettings = true;
+
+    package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+      version = "570.133.07";
+      sha256_64bit = "sha256-LUPmTFgb5e9VTemIixqpADfvbUX1QoTT2dztwI3E3CY=";
+      sha256_aarch64 = "";
+      openSha256 = "sha256-9l8N83Spj0MccA8+8R1uqiXBS0Ag4JrLPjrU3TaXHnM=";
+      settingsSha256 = "sha256-XMk+FvTlGpMquM8aE8kgYK2PIEszUZD2+Zmj2OpYrzU=";
+      persistencedSha256 = "";
     };
   };
+  # End for NVIDIA
 
   services = {
     xserver = {
@@ -206,7 +245,6 @@
           enableContribAndExtras = true;
         };
       };
-      videoDrivers = ["nvidia"];
       xkb.layout = "us";
       xkb.variant = "";
     };
@@ -228,8 +266,7 @@
 
   console.keyMap = "us";
 
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  # services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa = {
@@ -276,7 +313,7 @@
   };
 
   nix = {
-    package = pkgs.nixVersions.stable;
+    package = pkgs.nixVersions.latest;
     extraOptions = "experimental-features = nix-command flakes";
     settings = {
       auto-optimise-store = true;
@@ -291,5 +328,5 @@
       options = "--delete-older-than 7d";
     };
   };
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }

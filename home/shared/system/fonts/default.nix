@@ -11,6 +11,10 @@
     powerline-symbols
     material-design-icons
     commit-mono
-    (nerdfonts.override {fonts = ["IBMPlexMono" "CascadiaCode" "FiraCode" "FiraMono" "JetBrainsMono" "Ubuntu"];})
+    nerd-fonts.ubuntu
+    nerd-fonts.fira-code
+    nerd-fonts.fira-mono
+    nerd-fonts.jetbrains-mono
+    # nerd-fonts.cascadia-code
   ];
 }

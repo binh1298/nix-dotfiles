@@ -29,7 +29,7 @@
     enable = true;
     # package = pkgs.vscodium;
     # package = pkgs.vscode.fhs;
-    extensions = with pkgs.vscode-extensions;
+    profiles.default.extensions = with pkgs.vscode-extensions;
       [
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
@@ -82,7 +82,7 @@
           sha256 = "sha256-XZykYkIwu4rx9guYpIOPU4OPUpi437u98KP+YfbSMBs=";
         }
       ];
-    userSettings = {
+    profiles.default.userSettings = {
       # "[typescriptreact]" = {
       #   "editor.defaultFormatter" = "biomejs.biome";
       # };

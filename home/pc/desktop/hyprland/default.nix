@@ -33,8 +33,8 @@ in {
       monitor = [
         # "eDP-1,1920x1080,0x0,1"
         # ",1920x1080,auto,1"
-        "DP-2,2560x1440@144,0x0,1"
-        "HDMI-A-1,1920x1080@60,2560x0,1"
+        "HDMI-A-2,2560x1440@144,0x0,1"
+        # "HDMI-A-1,1920x1080@60,2560x0,1"
         "Unknown-1,disable"
       ];
 
@@ -64,30 +64,30 @@ in {
         "col.active_border" = "${catppuccin_border}";
         "col.inactive_border" = "${tokyonight_background}";
         layout = "dwindle";
-        apply_sens_to_raw =
-          1; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
+        # apply_sens_to_raw =
+        # 1; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       };
 
-      decoration = {
-        rounding = 12;
-        shadow_ignore_window = true;
-        drop_shadow = false;
-        shadow_range = 20;
-        shadow_render_power = 3;
-        "col.shadow" = "rgb(${oxocarbon_background})";
-        "col.shadow_inactive" = "${background}";
-        blur = {
-          enabled = false;
-          size = 5;
-          passes = 3;
-          new_optimizations = true;
-          ignore_opacity = true;
-          noise = 1.17e-2;
-          contrast = 1.5;
-          brightness = 1;
-          xray = true;
-        };
-      };
+      # decoration = {
+      #   rounding = 12;
+      #   shadow_ignore_window = true;
+      #   drop_shadow = false;
+      #   shadow_range = 20;
+      #   shadow_render_power = 3;
+      #   "col.shadow" = "rgb(${oxocarbon_background})";
+      #   "col.shadow_inactive" = "${background}";
+      #   blur = {
+      #     enabled = false;
+      #     size = 5;
+      #     passes = 3;
+      #     new_optimizations = true;
+      #     ignore_opacity = true;
+      #     noise = 1.17e-2;
+      #     contrast = 1.5;
+      #     brightness = 1;
+      #     xray = true;
+      #   };
+      # };
 
       animations = {
         enabled = true;
@@ -120,7 +120,7 @@ in {
         force_split = 0;
         preserve_split = true;
         default_split_ratio = 1.0;
-        no_gaps_when_only = false;
+        # no_gaps_when_only = false;
         special_scale_factor = 0.8;
         split_width_multiplier = 1.0;
         use_active_for_splits = true;
@@ -130,8 +130,8 @@ in {
         mfact = 0.5;
         orientation = "right";
         special_scale_factor = 0.8;
-        new_is_master = true;
-        no_gaps_when_only = false;
+        # new_is_master = true;
+        # no_gaps_when_only = false;
       };
 
       gestures = {workspace_swipe = false;};
@@ -149,7 +149,7 @@ in {
 
       bind = [
         "$mainMod,Q,killactive,"
-        "$mainMod,M,exit,"
+        # "$mainMod,M,exit,"
         "$mainMod,W,togglefloating,"
         "$mainMod,g,togglegroup"
         # "$mainMod,tab,changegroupactive"
@@ -262,9 +262,9 @@ in {
         # Window rules
         "tile,title:^(kitty)$"
         "float,title:^(fly_is_kitty)$"
-        "tile,^(Spotify)$"
+        # "tile,^(Spotify)$"
         # "tile,^(neovide)$"
-        "tile,^(wps)$"
+        # "tile,^(wps)$"
       ];
 
       windowrulev2 = [
