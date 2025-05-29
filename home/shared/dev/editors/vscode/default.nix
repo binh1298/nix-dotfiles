@@ -31,6 +31,7 @@
     # package = pkgs.vscode.fhs;
     profiles.default.extensions = with pkgs.vscode-extensions;
       [
+        pkief.material-icon-theme
         bbenoist.nix
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
@@ -125,6 +126,7 @@
       "editor.formatOnSave" = true;
       "terminal.integrated.scrollback" = 100000;
       "workbench.colorTheme" = "Catppuccin Mocha";
+      "workbench.iconTheme" = "material-icon-theme";
     };
   };
 }
