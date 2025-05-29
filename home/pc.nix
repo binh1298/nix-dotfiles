@@ -7,7 +7,7 @@
   home = {
     username = username;
     homeDirectory = "/home/${username}";
-    stateVersion = "25.05";
+    stateVersion = "24.11";
   };
 
   programs.home-manager.enable = true;
@@ -20,6 +20,7 @@
     ./shared/dev
     ./shared/system
     ./shared/tools/git-token
+    ./shared/ai
     ./pc/cli
     ./pc/desktop
     ./pc/dev/misc.nix

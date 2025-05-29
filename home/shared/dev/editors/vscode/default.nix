@@ -46,12 +46,6 @@
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
-          name = "salesforcedx-vscode";
-          publisher = "salesforce";
-          version = "59.13.0";
-          sha256 = "sha256-YWrNFDXUT4VPiIJYP4qN7OGaQL58k4s/9JSlz0dYwZ4=";
-        }
-        {
           name = "makefile-tools";
           publisher = "ms-vscode";
           version = "0.9.2";

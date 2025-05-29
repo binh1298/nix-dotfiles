@@ -3,32 +3,17 @@
   username,
   ...
 }: {
-  programs.dconf.enable = true;
-
-  users.users.${username}.extraGroups = ["libvirtd"];
-
   environment.systemPackages = with pkgs; [
-    virt-manager
-    virt-viewer
-    spice
-    spice-gtk
-    spice-protocol
-    win-virtio
-    win-spice
-    gnome.adwaita-icon-theme
-    swtpm
-  ];
+    # support 64-bit only
+    (wine.override {wineBuild = "wine64";})
 
-  virtualisation = {
-    libvirtd = {
-      enable = true;
-      qemu = {
-        swtpm.enable = true;
-        ovmf.enable = true;
-        ovmf.packages = [pkgs.OVMFFull.fd];
-      };
-    };
-    spiceUSBRedirection.enable = true;
-  };
-  services.spice-vdagentd.enable = true;
+    # support 64-bit only
+    wine64
+
+    # winetricks (all versions)
+    winetricks
+
+    # native wayland support (unstable)
+    wineWowPackages.waylandFull
+  ];
 }

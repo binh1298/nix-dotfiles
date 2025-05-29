@@ -4,11 +4,13 @@
   inputs,
   username,
   lib,
+  secrets,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../home/pc/wine
   ];
 
   home-manager.users.${username} = {
@@ -17,6 +19,41 @@
     ];
   };
 
+  programs.openvpn3.enable = true;
+  services.openvpn.servers = {
+    office = {
+      config = ''config /home/${username}/Downloads/lpsvpn_client_3 6.ovpn'';
+      autoStart = false; # Set to true if you want it to start automatically
+      authUserPass = {
+        username = "${secrets.vpn_username}";
+        password = "${secrets.vpn_corp_token}";
+      };
+      updateResolvConf = true; # For DNS resolution
+    };
+    gitlab = {
+      config = ''config /home/${username}/Downloads/profile-9799.ovpn'';
+      autoStart = false; # Set to true if you want it to start automatically
+      authUserPass = {
+        username = "${secrets.vpn_username}";
+        password = "${secrets.vpn_gl_token}";
+      };
+      updateResolvConf = true; # For DNS resolution
+    };
+  };
+
+
+  fileSystems = {
+    "/home/${username}/data" = {
+      device = "/dev/disk/by-uuid/ACD4D5B4D4D5814E";
+      fsType = "ntfs";
+      options = ["users" "nofail"];
+    };
+    "/home/${username}/windows" = {
+      device = "/dev/disk/by-uuid/D0765DB4765D9BD2";
+      fsType = "ntfs";
+      options = ["users" "nofail"];
+    };
+  };
   # Bootloader.
   boot = {
     kernelModules = ["r8125" "r8169" "iwlwifi"]; # Autostart kernel modules on boot
@@ -118,8 +155,21 @@
     };
   };
 
-  # Allow unfree packages + use overlays
-  nixpkgs = {config = {allowUnfree = true;};};
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+      "steam"
+      "steam-unwrapped"
+
+      "cuda_cudart"
+      "libcublas"
+      "cuda_cccl"
+      "cuda_nvcc"
+
+      "lmstudio"
+      "ngrok"
+    ];
 
   fonts = {
     enableDefaultPackages = true;
@@ -186,6 +236,9 @@
       OBSIDIAN_USE_WAYLAND = "1";
     };
     systemPackages = with pkgs; [
+      lmstudio
+      ngrok
+      pamixer
       v4l-utils
       pciutils
       killall
@@ -210,6 +263,10 @@
   hardware.graphics = {
     enable = true;
   };
+  services.ollama.enable = true;
+  services.ollama.acceleration = "cuda";
+  # services.open-webui.enable = true;
+  # services.open-webui.port = 7777;
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
@@ -266,7 +323,7 @@
 
   console.keyMap = "us";
 
-  # services.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa = {
@@ -328,5 +385,5 @@
       options = "--delete-older-than 7d";
     };
   };
-  system.stateVersion = "25.05";
+  system.stateVersion = "24.11";
 }

@@ -1,8 +1,10 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }: {
   programs.btop = {
+    package = pkgs.btop-cuda;
     enable = true;
     settings = {
       color_theme = "catppuccin_macchiato";

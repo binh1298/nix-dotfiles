@@ -12,6 +12,7 @@
   tokyonight_border = "rgba(7aa2f7ee) rgba(87aaf8ee) 45deg";
   tokyonight_background = "rgba(32344aaa)";
   catppuccin_border = "rgba(b4befeee)";
+  catppuccin_border_oled = "rgba(5A5F80EE)";
   opacity = ".95";
   cursor = "macOS-BigSur";
 in {
@@ -29,7 +30,7 @@ in {
     package = pkgs.hyprland;
     xwayland = {enable = true;};
     settings = {
-      "$mainMod" = "ALT";
+      "$mainMod" = "SUPER";
       monitor = [
         # "eDP-1,1920x1080,0x0,1"
         ",1920x1080,auto,1"
@@ -61,7 +62,7 @@ in {
         gaps_in = 1;
         gaps_out = 2;
         border_size = 3;
-        "col.active_border" = "${catppuccin_border}";
+        "col.active_border" = "${catppuccin_border_oled}";
         "col.inactive_border" = "${tokyonight_background}";
         layout = "dwindle";
         # apply_sens_to_raw =
@@ -226,7 +227,8 @@ in {
         "$mainMod SHIFT,C,exec,wallpaper"
         "$mainMod,A,exec,fuzzel"
         "$mainMod,F,fullscreen"
-        # "$mainMod,z,exec,waybar"
+        "$mainMod,z,exec,waybar"
+        "$mainMod SHIFT,Z,exec,killall .waybar-wrapped"
         # "$mainMod,space,exec, tofi-drun --drun-launch=true"
         # $mainMod,space,exec,wofi --show drun -I -s ~/.config/wofi/style.css DP-3
         # "$mainMod SHIFT,V,exec,~/.config/eww/fool_moon/bar/scripts/widgets toggle-clip"
@@ -249,8 +251,9 @@ in {
         ",XF86MonBrightnessUp,exec,brightnessctl set 5+"
         ",XF86MonBrightnessDown,exec,brightnessctl set 5%-"
         # Volume Keys
-        ",XF86AudioRaiseVolume,exec,amixer -D pipewire sset Master 5%+"
-        ",XF86AudioLowerVolume,exec,amixer -D pipewire sset Master 5%-"
+        ",XF86AudioRaiseVolume,exec,pamixer --increase 5"
+        ",XF86AudioLowerVolume,exec,pamixer --decrease 5"
+        ",XF86AudioMute,exec,pamixer --toggle-mute"
       ];
       bindl = [
         ",switch:on:Lid Switch, exec, swaylock -i ~/Pictures/programmer.gif"

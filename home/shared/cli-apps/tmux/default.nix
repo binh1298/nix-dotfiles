@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, username, ...}: {
   programs.tmux = {
     enable = true;
     clock24 = true;
@@ -11,10 +11,8 @@
 
     extraConfig = ''
       set-option -g default-terminal "screen-256color"
-
-      set-option -g default-shell /bin/zsh
-      set -g default-command /bin/zsh
-
+      set-option -g default-shell /etc/profiles/per-user/${username}/bin/zsh
+      set -g default-command /etc/profiles/per-user/${username}/bin/zsh  
       set -g @resurrect-processes '"~nvim->nvim"'
 
       # Shift Alt vim keys to switch windows
