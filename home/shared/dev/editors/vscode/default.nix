@@ -31,6 +31,7 @@
     # package = pkgs.vscode.fhs;
     profiles.default.extensions = with pkgs.vscode-extensions;
       [
+        bbenoist.nix
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
         eamodio.gitlens
@@ -43,6 +44,7 @@
         vscodevim.vim
         bradlc.vscode-tailwindcss
         mechatroner.rainbow-csv
+        catppuccin.catppuccin-vsc
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
@@ -74,6 +76,12 @@
           publisher = "mongodb";
           version = "1.6.0";
           sha256 = "sha256-XZykYkIwu4rx9guYpIOPU4OPUpi437u98KP+YfbSMBs=";
+        }
+        {
+          name = "vim-enhanced";
+          publisher = "mcaragheorghe";
+          version = "0.0.9";
+          sha256 = "MVIgs4AQKR6AE2T0Sgh6HoNr8zNEhVtu6DhQXWUrA4k=";
         }
       ];
     profiles.default.userSettings = {
@@ -116,6 +124,7 @@
       "terminal.integrated.shell.linux" = "zsh";
       "editor.formatOnSave" = true;
       "terminal.integrated.scrollback" = 100000;
+      "workbench.colorTheme" = "Catppuccin Mocha";
     };
   };
 }
