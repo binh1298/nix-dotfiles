@@ -6,7 +6,14 @@
   lib,
   secrets,
   ...
-}: {
+}: let
+  pkgsFirmware = import inputs.nixpkgs-firmware {
+    inherit (pkgs) system;
+  };
+in {
+  # Make sure wifi is stable https://bbs.archlinux.org/viewtopic.php?id=305531
+  hardware.firmware = [pkgsFirmware.linux-firmware];
+
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -41,7 +48,6 @@
     };
   };
 
-
   fileSystems = {
     "/home/${username}/data" = {
       device = "/dev/disk/by-uuid/ACD4D5B4D4D5814E";
@@ -62,7 +68,7 @@
       options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
     '';
     kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_6_14;
     supportedFilesystems = ["ntfs"];
     loader = {
       systemd-boot.enable = false; # (for UEFI systems only)
@@ -263,8 +269,8 @@
   hardware.graphics = {
     enable = true;
   };
-  services.ollama.enable = true;
-  services.ollama.acceleration = "cuda";
+  services.ollama.enable = false;
+  # services.ollama.acceleration = "cuda";
   # services.open-webui.enable = true;
   # services.open-webui.port = 7777;
   services.xserver.videoDrivers = ["nvidia"];

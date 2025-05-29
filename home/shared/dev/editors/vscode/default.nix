@@ -31,6 +31,7 @@
     # package = pkgs.vscode.fhs;
     profiles.default.extensions = with pkgs.vscode-extensions;
       [
+        kamadorueda.alejandra 
         pkief.material-icon-theme
         bbenoist.nix
         dbaeumer.vscode-eslint
@@ -127,6 +128,7 @@
       "terminal.integrated.scrollback" = 100000;
       "workbench.colorTheme" = "Catppuccin Mocha";
       "workbench.iconTheme" = "material-icon-theme";
+      "github.copilot.nextEditSuggestions.enabled" = true;
     };
   };
 }

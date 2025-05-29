@@ -20,6 +20,8 @@ in {
     grim
     slurp
     swappy
+    hyprlock
+    hypridle
 
     (writeShellScriptBin "screenshot" ''
       grim -g "$(slurp)" - | wl-copy && wl-paste | swappy -f -
@@ -146,6 +148,7 @@ in {
         "easyeffects --gapplication-service" # Starts easyeffects in the background
         "$HOME/.config/hypr/autostart"
         "exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "hypridle"
       ];
 
       bind = [
@@ -229,6 +232,7 @@ in {
         "$mainMod,F,fullscreen"
         "$mainMod,z,exec,waybar"
         "$mainMod SHIFT,Z,exec,killall .waybar-wrapped"
+        "$mainMod,Escape,exec,hyprlock"
         # "$mainMod,space,exec, tofi-drun --drun-launch=true"
         # $mainMod,space,exec,wofi --show drun -I -s ~/.config/wofi/style.css DP-3
         # "$mainMod SHIFT,V,exec,~/.config/eww/fool_moon/bar/scripts/widgets toggle-clip"
@@ -326,6 +330,8 @@ in {
   };
   # Hyprland configuration files
   xdg.configFile = {
+    "hypr/hypridle.conf".source = ./hypridle/hypridle.conf;
+    "hypr/hyprlock.conf".source = ./hyprlock/hyprlock.conf;
     "hypr/autostart".source = ./autostart;
     "hypr/store/dynamic_out.txt".source = ./store/dynamic_out.txt;
     "hypr/store/prev.txt".source = ./store/prev.txt;
